@@ -1,0 +1,468 @@
+<style>
+  @font-face {
+    font-family: "Schibsted Grotesk";
+    src: url("data:font/woff2;base64,__FONT_SCHIBSTED__") format("woff2");
+    font-weight: 400 800; font-display: swap; font-style: normal;
+  }
+  @font-face {
+    font-family: "Hanken Grotesk";
+    src: url("data:font/woff2;base64,__FONT_HANKEN__") format("woff2");
+    font-weight: 300 700; font-display: swap; font-style: normal;
+  }
+
+  :root {
+    --bg: oklch(0.985 0.007 160);
+    --surface: oklch(1 0 0);
+    --ink: oklch(0.24 0.014 160);
+    --ink-soft: oklch(0.40 0.018 160);
+    --muted: oklch(0.52 0.016 160);
+    --primary: oklch(0.48 0.102 158);
+    --primary-deep: oklch(0.40 0.10 158);
+    --primary-ink: oklch(0.99 0.012 155);
+    --forest: oklch(0.19 0.016 166);
+    --forest-2: oklch(0.24 0.02 166);
+    --forest-ink: oklch(0.94 0.01 160);
+    --forest-muted: oklch(0.72 0.02 160);
+    --line: oklch(0.90 0.01 160);
+    --line-strong: oklch(0.84 0.012 160);
+    --amber: oklch(0.55 0.13 65);
+    --emerald: oklch(0.52 0.11 160);
+    --r: 14px;
+    --r-lg: 22px;
+    --maxw: 1140px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 {
+    font-family: "Schibsted Grotesk", "Hanken Grotesk", sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0;
+    text-wrap: balance;
+    font-weight: 700;
+  }
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- nav ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in oklab, var(--bg) 82%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  header.scrolled { border-color: var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-family: "Schibsted Grotesk"; font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+  .brand .mark { width: 34px; height: 34px; border-radius: 10px; box-shadow: 0 2px 8px oklch(0.48 0.102 158 / 0.28); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a.txt { color: var(--ink-soft); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a.txt:hover { color: var(--primary); }
+  @media (max-width: 720px) { .nav-links .txt { display: none; } }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "Hanken Grotesk"; font-weight: 600; font-size: 15px;
+    padding: 10px 18px; border-radius: 11px; cursor: pointer;
+    border: 1px solid transparent; transition: transform 0.15s var(--ease), background 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--primary); color: var(--primary-ink); box-shadow: 0 1px 2px oklch(0.4 0.1 158 / 0.3), 0 6px 20px oklch(0.48 0.102 158 / 0.22); }
+  .btn-primary:hover { background: var(--primary-deep); box-shadow: 0 1px 2px oklch(0.4 0.1 158 / 0.3), 0 8px 26px oklch(0.48 0.102 158 / 0.32); }
+  .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+  .btn svg { width: 17px; height: 17px; }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: 76px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 940px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.15rem); font-weight: 800; }
+  .hero h1 .g { color: var(--primary); }
+  .hero .lead { margin-top: 22px; font-size: clamp(1.05rem, 2vw, 1.22rem); color: var(--ink-soft); max-width: 33ch; }
+  .hero .cta-row { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero .runs { margin-top: 22px; font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .hero .runs svg { width: 15px; height: 15px; color: var(--primary); }
+
+  .shot-frame {
+    border-radius: var(--r-lg); background: var(--surface);
+    border: 1px solid var(--line); overflow: hidden;
+    box-shadow: 0 1px 1px oklch(0.2 0.02 160 / 0.04), 0 24px 60px -20px oklch(0.3 0.04 160 / 0.28), 0 8px 24px -12px oklch(0.3 0.04 160 / 0.16);
+  }
+  .shot-frame .bar { display: flex; align-items: center; gap: 6px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: color-mix(in oklab, var(--bg) 60%, var(--surface)); }
+  .shot-frame .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); display: block; }
+  .shot-frame img { width: 100%; }
+  .hero-shot { transform: perspective(1600px) rotateY(-3deg); transform-origin: left center; }
+  @media (max-width: 940px) { .hero-shot { transform: none; } }
+
+  /* ---------- marquee band ---------- */
+  .band { margin-top: 44px; background: var(--forest); color: var(--forest-ink); position: relative; overflow: hidden; }
+  .band::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 90% at 88% 0%, oklch(0.48 0.102 158 / 0.35), transparent 60%); pointer-events: none; }
+  .band-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 40px 0; position: relative; }
+  @media (max-width: 720px) { .band-inner { grid-template-columns: 1fr; gap: 26px; padding: 34px 0; } }
+  .band .item { display: flex; gap: 15px; align-items: flex-start; padding: 6px 26px; border-left: 1px solid oklch(1 0 0 / 0.1); }
+  @media (max-width: 720px) { .band .item { border-left: none; padding: 0 4px; } }
+  .band .item:first-child { border-left: none; }
+  .band .item svg { width: 26px; height: 26px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+  .band .item h3 { font-size: 1.06rem; color: var(--forest-ink); }
+  .band .item p { font-size: 0.94rem; color: var(--forest-muted); margin-top: 5px; }
+
+  /* ---------- section frame ---------- */
+  section.blk { padding: 92px 0; }
+  .sec-head { max-width: 620px; margin-bottom: 52px; }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--primary); margin-bottom: 14px; }
+  .sec-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
+  .sec-head p { margin-top: 16px; font-size: 1.1rem; color: var(--ink-soft); }
+
+  /* feature: spotlight (dashboard) */
+  .spotlight { display: grid; grid-template-columns: 1fr 1.12fr; gap: 54px; align-items: center; }
+  @media (max-width: 940px) { .spotlight { grid-template-columns: 1fr; gap: 34px; } }
+  .spotlight h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+  .spotlight p { margin-top: 18px; color: var(--ink-soft); font-size: 1.08rem; }
+  .mini-list { margin-top: 26px; display: flex; flex-direction: column; gap: 14px; }
+  .mini-list .row { display: flex; gap: 12px; align-items: flex-start; }
+  .mini-list .row svg { width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; margin-top: 3px; }
+  .mini-list .row b { font-weight: 600; }
+  .mini-list .row span { color: var(--muted); }
+
+  /* feature grid */
+  .fgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 940px) { .fgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .fgrid { grid-template-columns: 1fr; } }
+  .fcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 26px 24px; transition: transform 0.2s var(--ease), box-shadow 0.2s, border-color 0.2s; }
+  .fcard:hover { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 14px 34px -18px oklch(0.3 0.04 160 / 0.3); }
+  .fcard .ico { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; background: color-mix(in oklab, var(--primary) 12%, var(--surface)); color: var(--primary); margin-bottom: 18px; }
+  .fcard .ico svg { width: 21px; height: 21px; }
+  .fcard h3 { font-size: 1.14rem; }
+  .fcard p { margin-top: 9px; color: var(--muted); font-size: 0.97rem; line-height: 1.55; }
+
+  /* showcase */
+  .showcase { background: color-mix(in oklab, var(--primary) 4%, var(--bg)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .show-grid { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; gap: 22px; }
+  @media (max-width: 860px) { .show-grid { grid-template-columns: 1fr; } }
+  .show-grid .cap { font-size: 14px; color: var(--muted); margin-top: 12px; text-align: center; }
+  .tall { grid-row: span 2; }
+
+  /* install */
+  .install-grid { display: grid; grid-template-columns: 0.95fr 1.2fr; gap: 48px; align-items: start; }
+  @media (max-width: 860px) { .install-grid { grid-template-columns: 1fr; gap: 30px; } }
+  .steps { display: flex; flex-direction: column; gap: 22px; margin-top: 26px; counter-reset: s; }
+  .steps li { list-style: none; display: flex; gap: 15px; }
+  .steps li .n { counter-increment: s; flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px; background: var(--primary); color: var(--primary-ink); display: grid; place-items: center; font-weight: 700; font-size: 14px; font-family: "Schibsted Grotesk"; }
+  .steps li .n::before { content: counter(s); }
+  .steps li b { font-weight: 600; }
+  .steps li p { color: var(--muted); font-size: 0.96rem; margin-top: 3px; }
+  .code {
+    background: var(--forest); color: var(--forest-ink); border-radius: var(--r);
+    border: 1px solid var(--forest-2); overflow: hidden; box-shadow: 0 20px 50px -24px oklch(0.19 0.016 166 / 0.6);
+  }
+  .code .top { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid oklch(1 0 0 / 0.08); }
+  .code .top span { font-size: 13px; color: var(--forest-muted); font-family: ui-monospace, monospace; }
+  .copy-btn { display: inline-flex; align-items: center; gap: 7px; background: oklch(1 0 0 / 0.08); color: var(--forest-ink); border: 1px solid oklch(1 0 0 / 0.12); padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: "Hanken Grotesk"; transition: background 0.2s; }
+  .copy-btn:hover { background: oklch(1 0 0 / 0.15); }
+  .copy-btn svg { width: 14px; height: 14px; }
+  .code pre { margin: 0; padding: 18px 20px; overflow-x: auto; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 13.5px; line-height: 1.7; color: oklch(0.9 0.02 160); }
+  .code pre .k { color: oklch(0.78 0.13 160); }
+  .code pre .s { color: oklch(0.82 0.1 90); }
+  .code pre .c { color: var(--forest-muted); }
+
+  /* final cta */
+  .final { text-align: center; padding: 96px 0; }
+  .final h2 { font-size: clamp(2rem, 4.4vw, 3.1rem); }
+  .final p { margin: 18px auto 0; color: var(--ink-soft); font-size: 1.12rem; max-width: 46ch; }
+  .final .cta-row { margin-top: 34px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .final .squirrel-big { width: 76px; height: 76px; border-radius: 20px; margin: 0 auto 28px; box-shadow: 0 12px 34px -8px oklch(0.48 0.102 158 / 0.45); }
+
+  /* footer */
+  footer { border-top: 1px solid var(--line); padding: 44px 0; }
+  .foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .foot .brand { font-size: 17px; }
+  .foot .meta { color: var(--muted); font-size: 14px; }
+  .foot a.gh { color: var(--ink-soft); display: inline-flex; align-items: center; gap: 8px; font-weight: 500; font-size: 15px; }
+  .foot a.gh:hover { color: var(--primary); }
+  .foot a.gh svg { width: 18px; height: 18px; }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-shot { transform: none; }
+  }
+</style>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <img class="mark" src="data:image/svg+xml;base64,__LOGO__" alt="" />
+      Squirrel
+    </a>
+    <nav class="nav-links">
+      <a class="txt" href="#features">Features</a>
+      <a class="txt" href="#install">Install</a>
+      <a class="btn btn-primary" href="https://github.com/code-by-gunnar/squirrel" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Every subscription,<br><span class="g">stashed</span> in one place you own.</h1>
+        <p class="lead">A self-hosted subscription tracker. See what you spend each month, catch renewals before they hit, and finally know what you're still paying for — from one small container on your own NAS.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://github.com/code-by-gunnar/squirrel" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+            View on GitHub
+          </a>
+          <a class="btn btn-ghost" href="#install">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Copy the compose stack
+          </a>
+        </div>
+        <p class="runs">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+          Runs on TrueNAS, Unraid, Synology, a Raspberry Pi — anything with Docker.
+        </p>
+      </div>
+      <div class="reveal in">
+        <div class="shot-frame hero-shot">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <img src="data:image/png;base64,__SHOT_DASH__" alt="Squirrel dashboard showing monthly spend, spend by category and upcoming renewals" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND -->
+  <div class="band">
+    <div class="wrap band-inner">
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/></svg>
+        <div><h3>See the real total</h3><p>Monthly and yearly spend across every service, in your own base currency.</p></div>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/><path d="M21 19H3l1.7-2.6a6 6 0 0 0 1-3.3V10a6.3 6.3 0 0 1 12.6 0v3.1a6 6 0 0 0 1 3.3z"/></svg>
+        <div><h3>Never miss a renewal</h3><p>A push to your phone before anything renews — so nothing surprises you.</p></div>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2C20 17.5 12 22 12 22z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div><h3>Own your data</h3><p>One container on your hardware. No cloud, no account, nothing leaves home.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPOTLIGHT -->
+  <section class="blk" id="features">
+    <div class="wrap spotlight">
+      <div class="reveal">
+        <div class="kicker">The dashboard</div>
+        <h2>The only question that matters: what am I actually spending?</h2>
+        <p>Squirrel answers it the moment you open it — a running monthly and yearly total, a breakdown by category, and the next handful of renewals lined up in order.</p>
+        <div class="mini-list">
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Normalised costs</b> — annual and quarterly plans shown as a true monthly figure.</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Spend by category</b> so you can see where the money actually goes.</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Renewal dates computed on read</b> from your start date — they never drift.</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="shot-frame"><div class="bar"><i></i><i></i><i></i></div>
+          <img src="data:image/png;base64,__SHOT_SUBS__" alt="Subscriptions grid with brand logos, prices and status badges" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE GRID -->
+  <section class="blk" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="kicker">Everything it does</div>
+        <h2>Small app, surprisingly complete.</h2>
+        <p>The features you'd actually use to keep subscriptions under control — and nothing you wouldn't.</p>
+      </div>
+      <div class="fgrid">
+        <div class="fcard reveal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/><path d="M21 19H3l1.7-2.6a6 6 0 0 0 1-3.3V10a6.3 6.3 0 0 1 12.6 0v3.1a6 6 0 0 0 1 3.3z"/></svg></div>
+          <h3>Renewal reminders</h3>
+          <p>A daily push to your phone via ntfy, a set number of days before each renewal and again on the day.</p>
+        </div>
+        <div class="fcard reveal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18"/><rect width="18" height="18" x="3" y="4" rx="2"/></svg></div>
+          <h3>Renewal calendar</h3>
+          <p>A month view showing exactly when each subscription bills, so a heavy week never catches you out.</p>
+        </div>
+        <div class="fcard reveal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></div>
+          <h3>Cancellations</h3>
+          <p>Mark something cancelled and it stays usable until it expires, then bows out of your totals — automatically.</p>
+        </div>
+        <div class="fcard reveal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="8" rx="2"/><path d="M12 8V6a2 2 0 0 0-2-2H8"/><path d="M2 14h20"/></svg></div>
+          <h3>Free-tier tracking</h3>
+          <p>Flag the services you're on the free plan for. Kept for awareness, left out of your spend.</p>
+        </div>
+        <div class="fcard reveal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <h3>Multi-currency</h3>
+          <p>Track subs in any currency; totals convert to your base with free daily ECB rates — no API key.</p>
+        </div>
+        <div class="fcard reveal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <h3>Install as an app</h3>
+          <p>It's a PWA — add it to your phone's home screen for a native feel with a bottom nav and slide-up forms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE -->
+  <section class="blk showcase">
+    <div class="wrap">
+      <div class="sec-head reveal" style="max-width: 660px;">
+        <div class="kicker">Built to look at</div>
+        <h2>A tool you self-host shouldn't feel like one.</h2>
+        <p>Clean typography, real brand logos fetched for you, light and dark themes, and a layout that works from a phone to a wide monitor.</p>
+      </div>
+      <div class="show-grid">
+        <div class="reveal tall">
+          <div class="shot-frame"><div class="bar"><i></i><i></i><i></i></div>
+            <img src="data:image/png;base64,__SHOT_CAL__" alt="Calendar view of upcoming subscription renewals" />
+          </div>
+          <p class="cap">Calendar — see the month at a glance</p>
+        </div>
+        <div class="reveal">
+          <div class="shot-frame"><div class="bar"><i></i><i></i><i></i></div>
+            <img src="data:image/png;base64,__SHOT_DARK__" alt="Dashboard in dark mode" />
+          </div>
+          <p class="cap">Dark mode, out of the box</p>
+        </div>
+        <div class="reveal">
+          <div class="shot-frame" style="max-width: 300px; margin: 0 auto;"><div class="bar"><i></i><i></i><i></i></div>
+            <img src="data:image/png;base64,__SHOT_MOBILE__" alt="Squirrel running as an app on a phone" />
+          </div>
+          <p class="cap">On your phone, as an app</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section class="blk" id="install">
+    <div class="wrap install-grid">
+      <div class="reveal">
+        <div class="kicker">Install</div>
+        <h2 style="font-size: clamp(1.9rem, 3.6vw, 2.7rem);">Up and running in two minutes.</h2>
+        <ol class="steps">
+          <li><span class="n"></span><div><b>Paste the stack</b><p>Into TrueNAS "Custom App", Dockge, Portainer, or a <code>compose.yaml</code> file.</p></div></li>
+          <li><span class="n"></span><div><b>Edit two secrets</b><p>Set a password and a random session secret. That's the whole config.</p></div></li>
+          <li><span class="n"></span><div><b>Deploy</b><p>Open it at your NAS address. Your data lives in one tidy volume.</p></div></li>
+        </ol>
+      </div>
+      <div class="reveal">
+        <div class="code">
+          <div class="top"><span>compose.yaml</span>
+            <button class="copy-btn" id="copyBtn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              Copy
+            </button>
+          </div>
+<pre id="composeCode"><span class="k">services</span>:
+  <span class="k">squirrel</span>:
+    <span class="k">image</span>: ghcr.io/code-by-gunnar/squirrel:latest
+    <span class="k">container_name</span>: squirrel
+    <span class="k">restart</span>: unless-stopped
+    <span class="k">ports</span>:
+      - <span class="s">"8480:3000"</span>
+    <span class="k">environment</span>:
+      <span class="k">APP_PASSWORD</span>: <span class="s">"change-me"</span>
+      <span class="k">SESSION_SECRET</span>: <span class="s">"a-long-random-string"</span>
+      <span class="k">BASE_CURRENCY</span>: <span class="s">"GBP"</span>
+      <span class="k">TZ</span>: <span class="s">"Europe/London"</span>
+    <span class="k">volumes</span>:
+      - squirrel-data:/app/data
+<span class="k">volumes</span>:
+  <span class="k">squirrel-data</span>:</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="wrap">
+      <img class="squirrel-big" src="data:image/svg+xml;base64,__LOGO__" alt="" />
+      <h2>Stop paying for things you forgot about.</h2>
+      <p>Squirrel is free and open source. Clone it, run it, keep every penny of insight on your own hardware.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/code-by-gunnar/squirrel" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+          Get it on GitHub
+        </a>
+        <a class="btn btn-ghost" href="#install">Read the install guide</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="#top"><img class="mark" src="data:image/svg+xml;base64,__LOGO__" alt="" /> Squirrel</a>
+    <p class="meta">Next.js · SQLite · ntfy — a personal project, do what you like with it.</p>
+    <a class="gh" href="https://github.com/code-by-gunnar/squirrel" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+      github.com/code-by-gunnar/squirrel
+    </a>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var hdr = document.getElementById('hdr');
+    var onScroll = function () { hdr.classList.toggle('scrolled', window.scrollY > 8); };
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reveals = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveals.forEach(function (el) { el.classList.add('in'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+    }
+
+    var btn = document.getElementById('copyBtn');
+    if (btn) btn.addEventListener('click', function () {
+      var text = document.getElementById('composeCode').innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+        setTimeout(function () { btn.innerHTML = orig; }, 1800);
+      });
+    });
+  })();
+</script>
