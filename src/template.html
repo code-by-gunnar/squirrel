@@ -94,9 +94,9 @@
 
   /* ---------- hero ---------- */
   .hero { position: relative; padding: 76px 0 40px; }
-  .hero-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: 56px; align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1.24fr; gap: 44px; align-items: center; }
   @media (max-width: 940px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
-  .hero h1 { font-size: clamp(2.15rem, 6vw, 4.15rem); font-weight: 800; }
+  .hero h1 { font-size: clamp(2.15rem, 5.4vw, 3.8rem); font-weight: 800; }
   .hero h1 .g { color: var(--primary); }
   .hero .lead { margin-top: 22px; font-size: clamp(1.05rem, 2vw, 1.22rem); color: var(--ink-soft); max-width: 33ch; }
   .hero .cta-row { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
@@ -111,8 +111,9 @@
   .shot-frame .bar { display: flex; align-items: center; gap: 6px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: color-mix(in oklab, var(--bg) 60%, var(--surface)); }
   .shot-frame .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); display: block; }
   .shot-frame img { width: 100%; }
-  .hero-shot { transform: perspective(1600px) rotateY(-3deg); transform-origin: left center; }
-  @media (max-width: 940px) { .hero-shot { transform: none; } }
+  .hero-shot { transform: perspective(1700px) rotateY(-3deg) scale(1.04); transform-origin: left center; }
+  @media (min-width: 1320px) { .hero-grid > div:last-child { margin-right: -48px; } }
+  @media (max-width: 940px) { .hero-shot { transform: none; } .hero-grid > div:last-child { margin-right: 0; } }
 
   /* ---------- marquee band ---------- */
   .band { margin-top: 44px; background: var(--forest); color: var(--forest-ink); position: relative; overflow: hidden; }
