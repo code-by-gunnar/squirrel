@@ -28,6 +28,7 @@ const doc = `<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>document.documentElement.classList.add('js')</script>
 <title>Squirrel — Self-hosted subscription tracker</title>
 <meta name="description" content="A self-hosted subscription tracker. See what you spend each month, catch renewals before they hit, and own your data — one small container on your own NAS." />
 <link rel="icon" href="data:image/svg+xml;base64,${tokens.__LOGO__}" />
