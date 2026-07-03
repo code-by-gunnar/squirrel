@@ -1,9 +1,9 @@
 # 🐿️ Squirrel — landing page
 
-The marketing site for [Squirrel](https://github.com/code-by-gunnar/squirrel), a
+The marketing site for [Squirrel](https://github.com/code-by-gunnar/squirrel.app), a
 personal, self-hosted subscription tracker.
 
-Live at **https://code-by-gunnar.github.io/squirrel-site/**
+Live at **https://code-by-gunnar.github.io/squirrel/**
 
 ## How it works
 
