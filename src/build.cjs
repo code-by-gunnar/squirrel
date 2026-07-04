@@ -18,6 +18,7 @@ const tokens = {
   __SHOT_CAL__: b64(path.join(SRC, "shots/shot-calendar.png")),
   __SHOT_DARK__: b64(path.join(SRC, "shots/shot-dashboard-dark.png")),
   __SHOT_MOBILE__: b64(path.join(SRC, "shots/shot-mobile.png")),
+  __SHOT_REPORTS__: b64(path.join(SRC, "shots/shot-reports.png")),
 };
 
 for (const [k, v] of Object.entries(tokens)) html = html.split(k).join(v);
