@@ -137,6 +137,9 @@
   /* feature: spotlight (dashboard) */
   .spotlight { display: grid; grid-template-columns: 1fr 1.12fr; gap: 54px; align-items: center; }
   @media (max-width: 940px) { .spotlight { grid-template-columns: 1fr; gap: 34px; } }
+  /* image-led variant: the shot takes the wider column so it doesn't read small */
+  .spotlight.img-lead { grid-template-columns: 1.35fr 0.85fr; }
+  @media (max-width: 940px) { .spotlight.img-lead { grid-template-columns: 1fr; } }
   .spotlight h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
   .spotlight p { margin-top: 18px; color: var(--ink-soft); font-size: 1.08rem; }
   .mini-list { margin-top: 26px; display: flex; flex-direction: column; gap: 14px; }
@@ -361,7 +364,7 @@
 
   <!-- REPORTS SPOTLIGHT -->
   <section class="blk" style="padding-top: 0;">
-    <div class="wrap spotlight">
+    <div class="wrap spotlight img-lead">
       <div class="reveal">
         <div class="shot-frame"><div class="bar"><i></i><i></i><i></i></div>
           <img src="data:image/png;base64,__SHOT_REPORTS__" alt="Reports page with a monthly spend chart and total spent to date" />
