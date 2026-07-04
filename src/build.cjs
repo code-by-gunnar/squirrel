@@ -16,7 +16,6 @@ const tokens = {
   __SHOT_DASH__: b64(path.join(SRC, "shots/shot-dashboard.png")),
   __SHOT_SUBS__: b64(path.join(SRC, "shots/shot-subs.png")),
   __SHOT_CAL__: b64(path.join(SRC, "shots/shot-calendar.png")),
-  __SHOT_DARK__: b64(path.join(SRC, "shots/shot-dashboard-dark.png")),
   __SHOT_MOBILE__: b64(path.join(SRC, "shots/shot-mobile.png")),
   __SHOT_REPORTS__: b64(path.join(SRC, "shots/shot-reports.png")),
 };

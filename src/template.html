@@ -158,11 +158,17 @@
 
   /* showcase */
   .showcase { background: color-mix(in oklab, var(--primary) 4%, var(--bg)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .show-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 34px; align-items: center; }
-  @media (max-width: 860px) { .show-grid { grid-template-columns: 1fr; gap: 26px; } }
-  .show-grid .cap { font-size: 14px; color: var(--muted); margin-top: 12px; text-align: center; }
-  .show-stack { display: flex; flex-direction: column; gap: 26px; }
-  .show-phone .shot-frame { max-width: 300px; margin: 0 auto; }
+  /* device overlap: a wide calendar with the phone tucked into its corner */
+  .overlap { position: relative; max-width: 880px; margin: 0 auto; }
+  .overlap-desktop { width: 88%; }
+  .overlap-phone {
+    position: absolute; right: 0; bottom: 0; width: 200px;
+    box-shadow: 0 30px 60px -18px oklch(0.19 0.016 166 / 0.5);
+  }
+  @media (max-width: 640px) {
+    .overlap-desktop { width: 100%; }
+    .overlap-phone { position: relative; right: auto; bottom: auto; width: 150px; margin: -44px auto 0; }
+  }
 
   /* install */
   .install-grid { display: grid; grid-template-columns: 0.95fr 1.2fr; gap: 48px; align-items: start; }
@@ -255,7 +261,7 @@
       <div class="reveal in">
         <div class="shot-frame hero-shot">
           <div class="bar"><i></i><i></i><i></i></div>
-          <img src="data:image/png;base64,__SHOT_DASH__" alt="Squirrel dashboard showing monthly spend, spend by category and upcoming renewals" />
+          <img src="data:image/png;base64,__SHOT_SUBS__" alt="Squirrel subscriptions screen with brand logos, prices and renewal dates" />
         </div>
       </div>
     </div>
@@ -294,7 +300,7 @@
       </div>
       <div class="reveal">
         <div class="shot-frame"><div class="bar"><i></i><i></i><i></i></div>
-          <img src="data:image/png;base64,__SHOT_SUBS__" alt="Subscriptions grid with brand logos, prices and status badges" />
+          <img src="data:image/png;base64,__SHOT_DASH__" alt="Squirrel dashboard showing monthly spend, spend by category and upcoming renewals" />
         </div>
       </div>
     </div>
@@ -380,28 +386,16 @@
       <div class="sec-head reveal" style="max-width: 660px;">
         <div class="kicker">Built to look at</div>
         <h2>A tool you self-host shouldn't feel like one.</h2>
-        <p>Clean typography, real brand logos fetched for you, light and dark themes, and a layout that works from a phone to a wide monitor.</p>
+        <p>Clean typography, real brand logos fetched for you, and a layout that scales from a phone to a wide monitor.</p>
       </div>
-      <div class="show-grid">
-        <div class="show-stack">
-          <div class="reveal">
-            <div class="shot-frame"><div class="bar"><i></i><i></i><i></i></div>
-              <img src="data:image/png;base64,__SHOT_CAL__" alt="Calendar view of upcoming subscription renewals" />
-            </div>
-            <p class="cap">Calendar: see the month at a glance</p>
-          </div>
-          <div class="reveal">
-            <div class="shot-frame"><div class="bar"><i></i><i></i><i></i></div>
-              <img src="data:image/png;base64,__SHOT_DARK__" alt="Dashboard in dark mode" />
-            </div>
-            <p class="cap">Dark mode, out of the box</p>
-          </div>
+      <div class="overlap reveal">
+        <div class="overlap-desktop shot-frame">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <img src="data:image/png;base64,__SHOT_CAL__" alt="Calendar of upcoming subscription renewals on a wide screen" />
         </div>
-        <div class="reveal show-phone">
-          <div class="shot-frame"><div class="bar"><i></i><i></i><i></i></div>
-            <img src="data:image/png;base64,__SHOT_MOBILE__" alt="Squirrel running as an app on a phone" />
-          </div>
-          <p class="cap">On your phone, as an app</p>
+        <div class="overlap-phone shot-frame">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <img src="data:image/png;base64,__SHOT_MOBILE__" alt="Squirrel installed as an app on a phone" />
         </div>
       </div>
     </div>
